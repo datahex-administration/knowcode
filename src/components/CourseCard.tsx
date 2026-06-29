@@ -1,16 +1,8 @@
 import Link from "next/link";
 import type { Course } from "@/lib/types";
-
-// soft brand gradient per category for the placeholder poster
-const CAT_GRADIENT: Record<string, string> = {
-  coding: "from-brand to-brand-400",
-  design: "from-brand-400 to-brand-600",
-  gaming: "from-brand-600 to-navy",
-  other: "from-brand-400 to-brand",
-};
+import { CoursePoster } from "./CoursePoster";
 
 export function CourseCard({ course }: { course: Course }) {
-  const grad = CAT_GRADIENT[course.category] ?? CAT_GRADIENT.coding;
   const isAdvanced = (course.level || "").toLowerCase().includes("advanc");
 
   return (
@@ -27,11 +19,10 @@ export function CourseCard({ course }: { course: Course }) {
             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className={`flex h-full items-center justify-center bg-gradient-to-br ${grad}`}>
-            <span className="text-4xl font-black text-white/90 transition duration-500 group-hover:scale-110">
-              &lt;/&gt;
-            </span>
-          </div>
+          <CoursePoster
+            course={course}
+            className="h-full w-full transition duration-500 group-hover:scale-105"
+          />
         )}
         {course.level && (
           <span

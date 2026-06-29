@@ -45,7 +45,7 @@ export async function POST(req: Request) {
   }
 
   // 2) Fire WhatsApp confirmation (best-effort — never block the applicant)
-  const send = await sendWhatsApp(mobile, applyConfirmationMessage(name));
+  const send = await sendWhatsApp(mobile, await applyConfirmationMessage(name));
   if (send.ok) {
     await supabase.from("applications").update({ notified: true }).eq("id", data.id);
   }

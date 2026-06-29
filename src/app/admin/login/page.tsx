@@ -15,9 +15,13 @@ export default function AdminLogin() {
     setLoading(true);
     setError("");
     const fd = new FormData(e.currentTarget);
+    const raw = String(fd.get("username")).trim();
+    // Accept a mobile number (digits) or a full email. Mobile maps to a
+    // synthetic email so it works with Supabase email/password auth.
+    const email = raw.includes("@") ? raw : `${raw.replace(/[^\d]/g, "")}@knowcode.academy`;
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({
-      email: String(fd.get("email")),
+      email,
       password: String(fd.get("password")),
     });
     if (error) {
@@ -36,8 +40,8 @@ export default function AdminLogin() {
         <h1 className="text-center text-xl font-bold text-navy">Admin Login</h1>
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div>
-            <label className="label" htmlFor="email">Email</label>
-            <input id="email" name="email" type="email" required className="input" />
+            <label className="label" htmlFor="username">Mobile number</label>
+            <input id="username" name="username" type="text" inputMode="text" autoComplete="username" placeholder="9656550933" required className="input" />
           </div>
           <div>
             <label className="label" htmlFor="password">Password</label>
@@ -49,7 +53,7 @@ export default function AdminLogin() {
           </button>
         </form>
         <p className="mt-4 text-center text-xs text-navy/50">
-          Create the admin user in Supabase → Authentication → Users.
+          Sign in with your registered mobile number.
         </p>
       </div>
     </div>

@@ -12,6 +12,7 @@ const items = [
   { href: "/admin/banners", label: "Banners" },
   { href: "/admin/applications", label: "Applications" },
   { href: "/admin/contacts", label: "Contacts" },
+  { href: "/admin/messaging", label: "Messaging" },
 ];
 
 export function AdminNav() {

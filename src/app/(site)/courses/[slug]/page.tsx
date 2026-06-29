@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ApplyForm } from "@/components/ApplyForm";
+import { CoursePoster } from "@/components/CoursePoster";
 import type { Course } from "@/lib/types";
 
 export const revalidate = 60;
@@ -25,13 +26,15 @@ export default async function CourseDetail({
     <div className="container-x py-12">
       <div className="grid gap-10 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          {course.poster_url && (
+          {course.poster_url ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={course.poster_url}
               alt={course.title}
               className="mb-6 w-full rounded-2xl object-cover shadow-card"
             />
+          ) : (
+            <CoursePoster course={course} className="mb-6 aspect-[16/7] w-full rounded-2xl shadow-card" />
           )}
           <div className="flex flex-wrap items-center gap-2">
             <span className="chip capitalize">{course.category}</span>
