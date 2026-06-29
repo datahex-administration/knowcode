@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { BlogPoster } from "@/components/BlogPoster";
 import type { Blog } from "@/lib/types";
 
 export const revalidate = 60;
@@ -24,9 +25,11 @@ export default async function BlogDetail({
   return (
     <article className="container-x max-w-3xl py-12">
       <Link href="/blog" className="text-sm font-semibold text-brand">← Back to blog</Link>
-      {blog.cover_url && (
+      {blog.cover_url ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={blog.cover_url} alt={blog.title} className="mt-5 w-full rounded-2xl shadow-card" />
+      ) : (
+        <BlogPoster blog={blog} className="mt-5 aspect-[16/7] w-full rounded-2xl shadow-card" />
       )}
       <h1 className="mt-6 text-3xl font-extrabold text-navy">{blog.title}</h1>
       <p className="mt-2 text-sm text-navy/40">

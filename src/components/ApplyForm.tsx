@@ -60,12 +60,8 @@ export function ApplyForm({
 
   return (
     <form onSubmit={onSubmit} className="card space-y-4 p-6">
-      <h3 className="text-lg font-bold text-navy">Apply for this course</h3>
-
-      <div>
-        <label className="label" htmlFor="name">Full name *</label>
-        <input id="name" name="name" required className="input" placeholder="Your name" />
-      </div>
+      <h3 className="text-lg font-bold text-navy">Register for this course</h3>
+      <p className="-mt-2 text-sm text-navy/55">Free to apply · instant WhatsApp confirmation.</p>
 
       <div>
         <label className="label" htmlFor="mobile">WhatsApp number *</label>
@@ -73,11 +69,17 @@ export function ApplyForm({
           id="mobile"
           name="mobile"
           required
-          className="input"
-          placeholder="919895123456 (with country code)"
+          className="input text-base"
+          placeholder="919895123456"
           inputMode="numeric"
+          autoComplete="tel"
         />
         <p className="mt-1 text-xs text-navy/50">Include country code, digits only.</p>
+      </div>
+
+      <div>
+        <label className="label" htmlFor="name">Full name *</label>
+        <input id="name" name="name" required className="input text-base" placeholder="Your name" autoComplete="name" />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -104,7 +106,7 @@ export function ApplyForm({
       {status === "error" && <p className="text-sm text-red-600">{error}</p>}
 
       <button type="submit" disabled={status === "loading"} className="btn-primary w-full disabled:opacity-60">
-        {status === "loading" ? "Submitting…" : "Submit Application"}
+        {status === "loading" ? "Submitting…" : "Register Now →"}
       </button>
     </form>
   );

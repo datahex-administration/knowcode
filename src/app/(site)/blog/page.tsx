@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { Reveal } from "@/components/Reveal";
+import { BlogPoster } from "@/components/BlogPoster";
 import type { Blog } from "@/lib/types";
 
 export const revalidate = 60;
@@ -31,9 +32,7 @@ export default async function BlogPage() {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={b.cover_url} alt={b.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
                   ) : (
-                    <div className="flex h-full items-center justify-center bg-gradient-to-br from-brand to-brand-400 text-3xl font-black text-white/90">
-                      ✎
-                    </div>
+                    <BlogPoster blog={b} className="h-full w-full transition duration-500 group-hover:scale-105" />
                   )}
                 </div>
                 <div className="p-5">

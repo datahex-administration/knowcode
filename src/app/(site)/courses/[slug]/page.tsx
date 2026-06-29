@@ -53,12 +53,28 @@ export default async function CourseDetail({
           {course.price && (
             <p className="mt-8 text-xl font-bold text-brand">{course.price}</p>
           )}
+
+          {/* mobile CTA — jumps to the form */}
+          <a href="#apply" className="btn-primary mt-6 w-full lg:hidden">Register for this course →</a>
         </div>
 
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div id="apply" className="scroll-mt-24 lg:sticky lg:top-24 lg:self-start">
           <ApplyForm courseId={course.id} courseTitle={course.title} />
         </div>
       </div>
+
+      {/* sticky bottom registration bar on mobile */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-navy/10 bg-white/95 p-3 backdrop-blur lg:hidden">
+        <div className="container-x flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="truncate text-sm font-bold text-navy">{course.title}</p>
+            <p className="text-xs text-navy/55">{course.price || "Free to apply"}</p>
+          </div>
+          <a href="#apply" className="btn-primary shrink-0 px-5 py-2.5 text-sm">Register Now</a>
+        </div>
+      </div>
+      {/* spacer so content isn't hidden behind the sticky bar */}
+      <div className="h-20 lg:hidden" />
     </div>
   );
 }
