@@ -177,7 +177,7 @@ export function BlogPoster({ blog, className = "" }: { blog: Blog; className?: s
 
   // Pick gradient stops + direction
   const [c1, c2] = STOPS[h % STOPS.length];
-  const [x1, y1, x2, y2] = DIRS[(h >> 4) % DIRS.length];
+  const [x1, y1, x2, y2] = DIRS[(h >>> 4) % DIRS.length];
 
   // Pick background pattern (0=dots, 1=grid, 2=diagonal, 3=rings)
   const pat = h % 4;
