@@ -6,9 +6,9 @@ export function Footer() {
     <footer className="mt-24 border-t border-navy/10 bg-navy text-white/80">
       <div className="container-x grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="[&_*]:!text-white">
-            <Logo />
-          </div>
+          <span className="inline-flex rounded-xl bg-white p-2 shadow-card">
+            <Logo className="h-12 w-auto" />
+          </span>
           <p className="mt-4 max-w-sm text-sm text-white/60">
             KnowCode Academy — skill development in coding, design, gaming and
             modern vibe-coding. Learn by building real products.

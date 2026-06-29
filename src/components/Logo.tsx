@@ -1,32 +1,38 @@
-// KnowCode Academy logo — split brain (circuit + code) in brand colors.
-// Drop a real logo.png into /public to swap, or keep this scalable SVG.
-export function Logo({ className = "h-9 w-auto" }: { className?: string }) {
+"use client";
+
+import { useState } from "react";
+
+// KnowCode Academy logo.
+// Drop your real logo at /public/logo.png (or .svg) and it is used automatically.
+// Until then, a clean built-in SVG mark + wordmark is shown as a fallback.
+export function Logo({ className = "h-10 w-auto" }: { className?: string }) {
+  const [useFallback, setUseFallback] = useState(false);
+
+  if (!useFallback) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src="/logo.png"
+        alt="KnowCode Academy"
+        className={className}
+        onError={() => setUseFallback(true)}
+      />
+    );
+  }
+
   return (
     <span className={"inline-flex items-center gap-2 " + className}>
-      <svg viewBox="0 0 64 64" className="h-full w-auto" aria-hidden>
-        {/* left hemisphere — navy, circuit */}
-        <path
-          d="M31 10c-8 0-13 5-13 11-4 1-6 4-6 8s2 6 5 7c0 5 4 9 9 9 2 0 4-1 5-2V10z"
-          fill="#0A1A35"
-        />
-        {/* right hemisphere — bright blue, code */}
-        <path
-          d="M33 10c8 0 13 5 13 11 4 1 6 4 6 8s-2 6-5 7c0 5-4 9-9 9-2 0-4-1-5-2V10z"
-          fill="#2F6BFF"
-        />
-        {/* circuit dots */}
-        <g fill="#fff">
-          <circle cx="24" cy="24" r="1.6" />
-          <circle cx="20" cy="33" r="1.6" />
-          <circle cx="26" cy="40" r="1.6" />
-        </g>
-        <g stroke="#fff" strokeWidth="1.4" fill="none">
-          <path d="M24 24h-4M20 33h6M26 40v-4" />
-        </g>
-        {/* code </> */}
-        <g stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M41 26l-3 6 3 6" />
-          <path d="M47 26l3 6-3 6" />
+      <svg viewBox="0 0 48 48" className="h-full w-auto" aria-hidden>
+        <rect x="3" y="3" width="42" height="42" rx="12" fill="#0A1A35" />
+        <g
+          stroke="#5b9bff"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M19 17l-7 7 7 7" />
+          <path d="M29 17l7 7-7 7" stroke="#2F6BFF" />
         </g>
       </svg>
       <span className="text-lg font-extrabold tracking-tight">

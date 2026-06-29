@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { Reveal } from "@/components/Reveal";
 import type { Blog } from "@/lib/types";
 
 export const revalidate = 60;
@@ -22,22 +23,28 @@ export default async function BlogPage() {
         <p className="mt-10 text-navy/50">No posts yet.</p>
       ) : (
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {blogs.map((b) => (
-            <Link key={b.id} href={`/blog/${b.slug}`} className="card group overflow-hidden transition hover:-translate-y-1 hover:shadow-lg">
-              <div className="aspect-[16/9] bg-brand-50">
-                {b.cover_url && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={b.cover_url} alt={b.title} className="h-full w-full object-cover" />
-                )}
-              </div>
-              <div className="p-5">
-                <h3 className="text-lg font-bold text-navy group-hover:text-brand">{b.title}</h3>
-                {b.excerpt && <p className="mt-1 line-clamp-2 text-sm text-navy/60">{b.excerpt}</p>}
-                <p className="mt-3 text-xs text-navy/40">
-                  {b.author} · {new Date(b.created_at).toLocaleDateString()}
-                </p>
-              </div>
-            </Link>
+          {blogs.map((b, i) => (
+            <Reveal key={b.id} delay={i * 80}>
+              <Link href={`/blog/${b.slug}`} className="card group h-full overflow-hidden transition duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+                <div className="aspect-[16/9] overflow-hidden">
+                  {b.cover_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={b.cover_url} alt={b.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                  ) : (
+                    <div className="flex h-full items-center justify-center bg-gradient-to-br from-brand to-brand-400 text-3xl font-black text-white/90">
+                      ✎
+                    </div>
+                  )}
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-bold text-navy transition group-hover:text-brand">{b.title}</h3>
+                  {b.excerpt && <p className="mt-1 line-clamp-2 text-sm text-navy/60">{b.excerpt}</p>}
+                  <p className="mt-3 text-xs text-navy/40">
+                    {b.author} · {new Date(b.created_at).toLocaleDateString()}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       )}

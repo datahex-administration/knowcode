@@ -43,8 +43,61 @@ body {
 
 /* gradient hero backdrop echoing the logo */
 .hero-bg {
+  position: relative;
+  overflow: hidden;
   background:
     radial-gradient(60% 80% at 80% 10%, rgba(47, 107, 255, 0.18), transparent 60%),
     radial-gradient(50% 60% at 10% 90%, rgba(91, 155, 255, 0.16), transparent 60%),
     linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+}
+
+/* ---------- animations ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(3deg); }
+}
+@keyframes blob {
+  0%, 100% { border-radius: 42% 58% 60% 40% / 45% 45% 55% 55%; }
+  50% { border-radius: 60% 40% 40% 60% / 55% 60% 40% 45%; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes gradient-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 9s ease-in-out infinite; }
+.animate-blob { animation: blob 12s ease-in-out infinite; }
+
+/* scroll-reveal: hidden until .is-visible is added by the Reveal component */
+.reveal { opacity: 0; }
+.reveal.is-visible { animation: fade-up 0.6s ease-out forwards; }
+
+/* animated gradient text for headline accent */
+.text-gradient {
+  background: linear-gradient(90deg, #2F6BFF, #5b9bff, #2356d6, #2F6BFF);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 6s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-float-slow, .animate-blob, .text-gradient { animation: none; }
+  .reveal { opacity: 1; }
+  .reveal.is-visible { animation: none; }
 }
