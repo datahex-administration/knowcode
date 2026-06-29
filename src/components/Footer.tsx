@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container-x grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
           <span className="inline-flex rounded-xl bg-white p-2 shadow-card">
-            <Logo className="h-12 w-auto" />
+            <Logo className="h-12 w-auto max-w-[160px] object-contain" />
           </span>
           <p className="mt-4 max-w-sm text-sm text-white/60">
             KnowCode Academy — skill development in coding, design, gaming and
