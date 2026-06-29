@@ -12,7 +12,7 @@ export function Logo({ className = "h-10 w-auto" }: { className?: string }) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
-        src="/logo.png"
+        src="/logo-web.png"
         alt="KnowCode Academy"
         className={className}
         onError={() => setUseFallback(true)}
